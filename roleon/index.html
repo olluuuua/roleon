@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Roleon — онбординг, который доводит до результата</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #111827;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* типографика */
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        /* кнопки */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #111827;
+            color: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary:hover {
+            background-color: #374151;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #111827;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            border-color: #111827;
+            background-color: #f9fafb;
+        }
+
+        /* шапка */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #111827;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #4b5563;
+        }
+
+        /* hero */
+        .hero {
+            padding: 60px 0 40px 0;
+        }
+
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-badge {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .stat {
+            font-size: 1.9rem;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        /* карточки */
+        .grid-2, .grid-3 {
+            display: grid;
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 24px;
+            padding: 32px;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 20px 0 8px;
+        }
+
+        .price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #6b7280;
+        }
+
+        /* таблица сравнения */
+        .comparison {
+            background: #f9fafb;
+            border-radius: 24px;
+            padding: 32px;
+            margin-top: 40px;
+        }
+
+        .comparison-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .feature {
+            font-weight: 600;
+        }
+
+        .roleon-check {
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        /* футер */
+        .footer {
+            background: #f9fafb;
+            padding: 48px 0;
+            text-align: center;
+            color: #4b5563;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .navbar {
+                flex-direction: column;
+            }
+            .hero-grid {
+                flex-direction: column;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+        }
+
+        .provocative {
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-left: 4px solid #111827;
+            padding-left: 20px;
+            margin: 32px 0;
+            color: #1f2937;
+        }
+
+        .guarantee {
+            background: #fef9c3;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 32px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="container">
+    <div class="navbar">
+        <div class="logo">
+            <!-- Замените имя файла на ваш логотип roleon logo white bg.png -->
+            <img src="roleon logo white bg.png" alt="Roleon" style="max-height: 48px;">
+        </div>
+        <div class="nav-links">
+            <a href="#problems">Проблема</a>
+            <a href="#solution">Решение</a>
+            <a href="#pricing">Цены</a>
+            <a href="#" class="btn btn-outline" style="padding: 8px 20px;">Войти</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="hero container">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">Автоматизируйся или вымри</div>
+                <h1>Онбординг, который <br> доводит до результата</h1>
+                <p style="font-size: 1.2rem; color: #374151; margin-bottom: 1.5rem;">Roleon — AI-платформа для малого и среднего бизнеса. Не просто учим, а заставляем задачи закрываться. <strong>4 часа в неделю — обратно вашему менеджеру.</strong></p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="#pricing" class="btn btn-primary">Попробовать 14 дней →</a>
+                    <a href="#solution" class="btn btn-outline">Как это работает</a>
+                </div>
+                <div class="hero-stats">
+                    <div><span class="stat">-40%</span><div class="stat-label">текучки в первый месяц</div></div>
+                    <div><span class="stat">4-6 нед.</span><div class="stat-label">вместо 10 на выход к результату</div></div>
+                    <div><span class="stat">87%</span><div class="stat-label">точность AI анализа перегрузок</div></div>
+                </div>
+            </div>
+            <div style="flex:1; background: #f3f4f6; border-radius: 32px; padding: 40px; text-align: center;">
+                <div style="font-size: 5rem;">⚡</div>
+                <div style="margin-top: 20px; font-weight: 600;">«Ручной онбординг умер. <br>Ты просто ещё не понял»</div>
+                <div style="margin-top: 16px; color: #4b5563;">— основатель Roleon</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проблема -->
+    <section id="problems" class="container section">
+        <div style="max-width: 720px;">
+            <h2>Ты теряешь деньги, пока сотрудник «входит в курс дела»</h2>
+            <p style="font-size: 1.2rem; color: #374151;">До 35% новичков уходят в первые 90 дней. Менеджеры тратят 7 часов в неделю на проверку «сделал — не сделал».</p>
+        </div>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-icon">😫</div>
+                <h3>Нет чётких задач</h3>
+                <p>Задачи теряются в мессенджерах. Сотрудник говорит «я не видел» — и дедлайн горит.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤷</div>
+                <h3>Хаотичная обратная связь</h3>
+                <p>Непонятно, где новичок застрял — перегруз, лень или выгорание. Реакция всегда с опозданием.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💸</div>
+                <h3>Зарплата без отдачи</h3>
+                <p>Вы платите 1–2 месяца, пока человек «осваивается». Это не онбординг, это благотворительность.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📉</div>
+                <h3>Текучка убивает команду</h3>
+                <p>Каждый уход в первый месяц — повторный найм, демотивация остальных и простои.</p>
+            </div>
+        </div>
+        <div class="provocative">
+            «Если без тебя онбординг встаёт — ты не руководитель, ты костыль. Roleon исправит это за 3 дня.»
+        </div>
+    </section>
+
+    <!-- Решение -->
+    <section id="solution" class="container section">
+        <h2>Как Roleon меняет правила</h2>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Чёткий трек задач</h3>
+                <p>Автоматический пошаговый маршрут для каждого новичка. Дедлайны, приоритеты и напоминания — без вашего участия.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>AI без слежки</h3>
+                <p>Анализируем только метрики активности. Без чтения переписок. Точность определения перегрузов — 87%.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Только уведомления, без дашбордов</h3>
+                <p>Руководитель получает 2–3 сообщения в неделю. Остальное — автопилот.</p>
+            </div>
+        </div>
+        <div class="comparison">
+            <h3 style="margin-bottom: 24px;">Roleon против хаоса</h3>
+            <div class="comparison-row">
+                <span class="feature">Excel / Trello / чаты</span>
+                <span>❌ ничего не напоминает</span>
+                <span class="roleon-check">✅ Roleon автоматически ведёт сотрудника</span>
+            </div>
+            <div class="comparison-row">
+                <span class="feature">BambooHR / Personio</span>
+                <span>❌ дорого, сложно, для крупных</span>
+                <span class="roleon-check">✅ от $49 / мес, настройка за 3 дня</span>
+            </div>
+            <div class="comparison-row">
+                <span class="feature">Ручной контроль менеджера</span>
+                <span>❌ 5–7 часов в неделю</span>
+                <span class="roleon-check">✅ 1–1,5 часа, только критические точки</span>
+            </div>
+        </div>
+        <div class="guarantee">
+            <p><strong>🔒 Гарантия результата:</strong> Если через 90 дней незавершённые задачи не снизятся на 25% — вернём деньги. Без вопросов.</p>
+        </div>
+    </section>
+
+    <!-- Тарифы -->
+    <section id="pricing" class="container section">
+        <h2 style="text-align: center;">Цены, которые окупаются за 3 дня</h2>
+        <div class="grid-3" style="margin-top: 32px;">
+            <div class="card">
+                <h3>Старт</h3>
+                <div class="price">$49 <small>/ месяц</small></div>
+                <p>До 10 сотрудников в онбординге</p>
+                <ul style="margin: 24px 0; list-style: none; padding-left: 0;">
+                    <li>✓ Неограниченное число треков</li>
+                    <li>✓ Telegram / Slack интеграция</li>
+                    <li>✓ Базовая аналитика</li>
+                </ul>
+                <a href="#" class="btn btn-outline" style="width: 100%; text-align: center;">Выбрать</a>
+            </div>
+            <div class="card" style="border: 2px solid #111827;">
+                <h3>Профи</h3>
+                <div class="price">$149 <small>/ месяц</small></div>
+                <p>До 50 сотрудников</p>
+                <ul style="margin: 24px 0; list-style: none; padding-left: 0;">
+                    <li>✓ Всё из Старта</li>
+                    <li>✓ Jira / Asana / CRM интеграции</li>
+                    <li>✓ AI-анализ выгорания</li>
+                    <li>✓ Приоритетная поддержка</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Попробовать 14 дней</a>
+            </div>
+            <div class="card">
+                <h3>Корпоративный</h3>
+                <div class="price">Индивидуально</div>
+                <p>От 50+ сотрудников, on‑premise, SLA</p>
+                <a href="#" class="btn btn-outline" style="width: 100%; margin-top: 32px; text-align: center;">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="container section" style="text-align: center; background: #f9fafb; border-radius: 48px; margin-bottom: 48px;">
+        <div style="padding: 48px 24px;">
+            <h2>Автоматизируйся или вымри</h2>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 16px auto;">Пришло время перестать надеяться на чудо. Roleon — это железобетонная система, которая доводит до результата.</p>
+            <a href="#" class="btn btn-primary" style="margin-top: 16px;">Запустить пилот за 3 дня →</a>
+            <p style="margin-top: 24px; font-size: 0.85rem; color: #6b7280;">Бесплатно 14 дней. Без карты.</p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 Roleon — AI tool, built for business. Все права защищены.</p>
+        <p style="margin-top: 8px;">
+            <a href="#" style="text-decoration: none; color: #4b5563;">Политика конфиденциальности</a>  |  
+            <a href="#" style="text-decoration: none; color: #4b5563;">Договор оферты</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
